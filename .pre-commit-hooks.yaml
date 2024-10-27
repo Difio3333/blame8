@@ -1,0 +1,7 @@
+- id: blame8
+  name: blame8
+  description: 'A precommit hook that tracks who failed the most precommit hooks.'
+  entry: blame8
+  language: python
+  types: [python]
+  require_serial: true
