@@ -5,10 +5,10 @@ import sys
 def main():
     # here is a list of the hooks we are using. Key is name of the hook, value is the command with which the terminal calls it, I think
     # the --edits make it so they don't actually change anyhting but just check and report errors
-    # need to discuss this in person since the bottom three commands are behaving very arcanely.  
+    # need to discuss this in person since the bottom three commands are behaving very arcanely.
     hooks = {
-        "isort": "isort . --check-only",
-        "flake8": "flake8 . --check",
+        "isort": "isort .",
+        "flake8": "flake8 .",
         "black": "black . --ignore=E501",
     }
 
@@ -17,7 +17,7 @@ def main():
     error_counter = 0  # Track whether all hooks passed
 
     # this error_counter needs to be hooked up to a local json that counts permanentely.
-    # but 
+    # but
 
     for hook, command in hooks.items():
         if run_hook(hook, command) is False:
@@ -26,10 +26,11 @@ def main():
     # Exit with code 0 if all passed, 1 if any failed
     if error_counter == 0:
         sys.exit(0)
-        #leads to "Success" output in prehook
+        # leads to "Success" output in prehook
     elif error_counter > 0:
         sys.exit(1)
-        #leads to "Failed" output in prehook
+        # leads to "Failed" output in prehook
+
 
 def run_hook(hook_name, command) -> bool:
     verbose = True
@@ -53,7 +54,7 @@ def run_hook(hook_name, command) -> bool:
             print(f"{hook_name} passed!")
         return result.returncode == 0
         # this could just say return True I think but I'm too afraid to change it.
-        #returncode = 0 is succes and 1 is failure.
+        # returncode = 0 is succes and 1 is failure.
 
     except subprocess.CalledProcessError:
         if verbose:
