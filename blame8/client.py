@@ -12,10 +12,7 @@ def main():
     hooks = {
         "isort": "isort . --check-only",
         "flake8": "flake8 . --check",
-        "black": "black . --ignore=E501",
-        "trailing-whitespace": "pre-commit run trailing-whitespace --all-files",
-        "end-of-file-fixer": "pre-commit run end-of-file-fixer --all-files",
-        "check-added-large-files": "pre-commit run check-added-large-files --all-files",
+        "black": "black . --ignore=E501"
     }
 
     # would be cool to make this so it draws from .pre-commit-config.yaml dynamically
@@ -55,10 +52,10 @@ def run_hook(hook_name, command) -> bool:
         # make it so it's only talking when doing the integrated pre-commit hooks.
 
     try:
-        result = subprocess.run(command, shell=True, check=True, capture_output=True)
+        subprocess.run(command, shell=True, check=True, capture_output=True)
         if verbose:
             print(f"{hook_name} passed!")
-        return result.returncode == 0
+        return True
         # this could just say return True I think but I'm too afraid to change it.
         #returncode = 0 is succes and 1 is failure.
 
