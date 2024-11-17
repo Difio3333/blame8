@@ -3,9 +3,6 @@ import sys
 
 
 def main():
-    # in order to be able to count if a singular 
-
-
     # here is a list of the hooks we are using. Key is name of the hook, value is the command with which the terminal calls it, I think
     # the --edits make it so they don't actually change anyhting but just check and report errors
     # need to discuss this in person since the bottom three commands are behaving very arcanely.  
@@ -13,9 +10,6 @@ def main():
         "isort": "isort . --check-only",
         "flake8": "flake8 . --check",
         "black": "black . --ignore=E501",
-        "trailing-whitespace": "pre-commit run trailing-whitespace --all-files",
-        "end-of-file-fixer": "pre-commit run end-of-file-fixer --all-files",
-        "check-added-large-files": "pre-commit run check-added-large-files --all-files",
     }
 
     # would be cool to make this so it draws from .pre-commit-config.yaml dynamically
@@ -38,9 +32,8 @@ def main():
         #leads to "Failed" output in prehook
 
 def run_hook(hook_name, command) -> bool:
-    verbose = False
+    verbose = True
 
-   
     if "isort" in hook_name:
         pass
 
