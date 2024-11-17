@@ -3,8 +3,8 @@ import sys
 
 
 def main():
-    # in order to be able to count if a singular 
-    # heloo
+   print("Testing verbosity")
+   print("Double verbose")
 
     # here is a list of the hooks we are using. Key is name of the hook, value is the command with which the terminal calls it, I think
     # the --edits make it so they don't actually change anyhting but just check and report errors
