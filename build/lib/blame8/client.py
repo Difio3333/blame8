@@ -3,16 +3,13 @@ import sys
 
 
 def main():
-    # in order to be able to count if a singular 
-    # heloo
-
     # here is a list of the hooks we are using. Key is name of the hook, value is the command with which the terminal calls it, I think
     # the --edits make it so they don't actually change anyhting but just check and report errors
     # need to discuss this in person since the bottom three commands are behaving very arcanely.  
     hooks = {
         "isort": "isort . --check-only",
         "flake8": "flake8 . --check",
-        "black": "black . --ignore=E501"
+        "black": "black . --ignore=E501",
     }
 
     # would be cool to make this so it draws from .pre-commit-config.yaml dynamically
@@ -35,9 +32,8 @@ def main():
         #leads to "Failed" output in prehook
 
 def run_hook(hook_name, command) -> bool:
-    verbose = False
+    verbose = True
 
-   
     if "isort" in hook_name:
         pass
 
@@ -52,10 +48,10 @@ def run_hook(hook_name, command) -> bool:
         # make it so it's only talking when doing the integrated pre-commit hooks.
 
     try:
-        subprocess.run(command, shell=True, check=True, capture_output=True)
+        result = subprocess.run(command, shell=True, check=True, capture_output=True)
         if verbose:
             print(f"{hook_name} passed!")
-        return True
+        return result.returncode == 0
         # this could just say return True I think but I'm too afraid to change it.
         #returncode = 0 is succes and 1 is failure.
 
