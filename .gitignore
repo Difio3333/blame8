@@ -1,2 +1,4 @@
 myenv/
 blame8/__pycache__/
+
+poetry.lock
